@@ -1,0 +1,49 @@
+{
+  "recorded_at": "2026-09-08",
+  "target": "User-designated E300; network address, account and credentials intentionally omitted.",
+  "scope": "Read-only SSH capability inspection. No sudo, module loading, USB role changes, gadget creation, clock/network changes, SDK execution, or power requests.",
+  "clock_note": "Date is the investigation date, not the target system clock.",
+  "observations": [
+    {
+      "command": "uname -mr",
+      "exit_code": 0,
+      "stdout_stderr": "6.6.10 aarch64\n"
+    },
+    {
+      "command": "cat /etc/os-release",
+      "exit_code": 0,
+      "stdout_stderr": "PRETTY_NAME=\"Ubuntu 22.04.4 LTS\"\nNAME=\"Ubuntu\"\nVERSION_ID=\"22.04\"\nVERSION=\"22.04.4 LTS (Jammy Jellyfish)\"\nVERSION_CODENAME=jammy\nID=ubuntu\nID_LIKE=debian\nHOME_URL=\"https://www.ubuntu.com/\"\nSUPPORT_URL=\"https://help.ubuntu.com/\"\nBUG_REPORT_URL=\"https://bugs.launchpad.net/ubuntu/\"\nPRIVACY_POLICY_URL=\"https://www.ubuntu.com/legal/terms-and-policies/privacy-policy\"\nUBUNTU_CODENAME=jammy\n"
+    },
+    {
+      "command": "ls -l /sys/class/udc",
+      "exit_code": 0,
+      "stdout_stderr": "\u603b\u8ba1 0\n"
+    },
+    {
+      "command": "grep -H . /sys/class/usb_role/*/role",
+      "exit_code": 0,
+      "stdout_stderr": "/sys/class/usb_role/UPHY0001:00-role-switch/role:none\n/sys/class/usb_role/UPHY0001:01-role-switch/role:none\n/sys/class/usb_role/UPHY0001:02-role-switch/role:none\n/sys/class/usb_role/UPHY0001:03-role-switch/role:none\n"
+    },
+    {
+      "command": "grep -E \"CONFIG_USB_(GADGET=|CONFIGFS|LIBCOMPOSITE|F_ACM|F_FS|ROLE_SWITCH|M1000_UDC)|CONFIG_CONFIGFS_FS\" /boot/config-6.6.10",
+      "exit_code": 0,
+      "stdout_stderr": "CONFIG_USB_GADGET=y\n# CONFIG_USB_M1000_UDC is not set\nCONFIG_USB_LIBCOMPOSITE=m\nCONFIG_USB_F_ACM=m\nCONFIG_USB_F_FS=m\nCONFIG_USB_CONFIGFS=m\nCONFIG_USB_CONFIGFS_SERIAL=y\nCONFIG_USB_CONFIGFS_ACM=y\nCONFIG_USB_CONFIGFS_OBEX=y\nCONFIG_USB_CONFIGFS_NCM=y\nCONFIG_USB_CONFIGFS_ECM=y\nCONFIG_USB_CONFIGFS_ECM_SUBSET=y\nCONFIG_USB_CONFIGFS_RNDIS=y\nCONFIG_USB_CONFIGFS_EEM=y\nCONFIG_USB_CONFIGFS_MASS_STORAGE=y\n# CONFIG_USB_CONFIGFS_F_LB_SS is not set\nCONFIG_USB_CONFIGFS_F_FS=y\n# CONFIG_USB_CONFIGFS_F_UAC1 is not set\n# CONFIG_USB_CONFIGFS_F_UAC1_LEGACY is not set\n# CONFIG_USB_CONFIGFS_F_UAC2 is not set\n# CONFIG_USB_CONFIGFS_F_MIDI is not set\n# CONFIG_USB_CONFIGFS_F_MIDI2 is not set\n# CONFIG_USB_CONFIGFS_F_HID is not set\n# CONFIG_USB_CONFIGFS_F_UVC is not set\n# CONFIG_USB_CONFIGFS_F_PRINTER is not set\nCONFIG_USB_ROLE_SWITCH=y\nCONFIG_CONFIGFS_FS=y\n"
+    },
+    {
+      "command": "dpkg-query -W gcc g++ make cmake libc6 libstdc++6 libusb-1.0-0-dev",
+      "exit_code": 0,
+      "stdout_stderr": "cmake\t3.22.1-1ubuntu1.22.04.2\ng++\t4:11.2.0-1ubuntu1\ngcc\t4:11.2.0-1ubuntu1\nlibc6:arm64\t2.35-0ubuntu3.14\nlibstdc++6:arm64\t12.3.0-1ubuntu1~22.04.3\nlibusb-1.0-0-dev:arm64\t2:1.0.25-1ubuntu2\nmake\t4.3-4.1build1\n"
+    },
+    {
+      "command": "ls -ld /sys/kernel/config/usb_gadget",
+      "exit_code": 1,
+      "stdout_stderr": "ls: \u65e0\u6cd5\u8bbf\u95ee '/sys/kernel/config/usb_gadget': \u6ca1\u6709\u90a3\u4e2a\u6587\u4ef6\u6216\u76ee\u5f55\n"
+    },
+    {
+      "command": "lsusb -t",
+      "exit_code": 0,
+      "stdout_stderr": "/:  Bus 10.Port 1: Dev 1, Class=root_hub, Driver=xhci-m1000/1p, 10000M\n/:  Bus 09.Port 1: Dev 1, Class=root_hub, Driver=xhci-m1000/1p, 480M\n/:  Bus 08.Port 1: Dev 1, Class=root_hub, Driver=xhci-m1000/1p, 10000M\n/:  Bus 07.Port 1: Dev 1, Class=root_hub, Driver=xhci-m1000/1p, 480M\n/:  Bus 06.Port 1: Dev 1, Class=root_hub, Driver=xhci-m1000/1p, 10000M\n/:  Bus 05.Port 1: Dev 1, Class=root_hub, Driver=xhci-m1000/1p, 480M\n/:  Bus 04.Port 1: Dev 1, Class=root_hub, Driver=xhci-m1000/1p, 10000M\n/:  Bus 03.Port 1: Dev 1, Class=root_hub, Driver=xhci-m1000/1p, 480M\n/:  Bus 02.Port 1: Dev 1, Class=root_hub, Driver=xhci_hcd/4p, 5000M\n/:  Bus 01.Port 1: Dev 1, Class=root_hub, Driver=xhci_hcd/4p, 480M\n    |__ Port 3: Dev 3, If 0, Class=Human Interface Device, Driver=usbhid, 1.5M\n    |__ Port 3: Dev 3, If 1, Class=Human Interface Device, Driver=usbhid, 1.5M\n    |__ Port 4: Dev 2, If 1, Class=Human Interface Device, Driver=usbhid, 1.5M\n    |__ Port 4: Dev 2, If 0, Class=Human Interface Device, Driver=usbhid, 1.5M\n"
+    }
+  ]
+}
+

@@ -1,0 +1,3 @@
+# Keep local analysis artifacts and editor settings out of the public repository.
+wiki/.tmp/
+.obsidian/

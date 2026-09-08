@@ -1,0 +1,6 @@
+interface:
+  display_name: "Payload-SDK 来源摄取"
+  short_description: "手动摄取项目来源，保留逐文件指纹、证据边界并同步知识库索引和日志"
+  default_prompt: "使用 $payload-sdk-ingest 检查来源变化，并将明确范围内的证据整合到项目 Wiki。"
+policy:
+  allow_implicit_invocation: false

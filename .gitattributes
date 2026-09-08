@@ -1,0 +1,3 @@
+# Preserve evidence bytes across platforms and treat PDFs as binary files.
+*.pdf binary
+test/raw/** -text

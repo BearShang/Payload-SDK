@@ -68,3 +68,14 @@ You can also communicate with other developers by the following methods:
 ## About Pull Request
 As always, the DJI Dev Team is committed to improving your developer experience, and we also welcome your contribution,
 but the code review of any pull request maybe not timely, when you have any questionplease send an email to dev@dji.com.
+
+## Project Wiki
+
+项目知识库入口：[Wiki 索引](wiki/index.md)。已整理 M400 / SkyPort V3 高功率申请、自制转接板及 E300 只读能力探测；24 V 申请与实测尚未完成。维护规则见 [AGENTS.md](AGENTS.md)。以仓库根目录作为 Obsidian 库根。
+
+手动摄取使用 `$payload-sdk-ingest`，规则见 [摄取技能](.agents/skills/payload-sdk-ingest/SKILL.md)。本地检查需要 PowerShell 5.1 或 7；来源工具和隔离测试另需 Git，无第三方模块。
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools/wiki_lint.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools/test_wiki_tools.ps1
+```
