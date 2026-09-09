@@ -1,3 +1,10 @@
 # Keep local analysis artifacts and editor settings out of the public repository.
 wiki/.tmp/
 .obsidian/
+
+# Python runtime caches.
+__pycache__/
+*.pyc
+
+# Independent local reference repository; commit its changes in that repository.
+/test/m400_power/

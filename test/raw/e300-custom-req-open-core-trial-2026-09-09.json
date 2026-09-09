@@ -1,0 +1,40 @@
+{
+  "observation_date": "2026-09-09",
+  "date_basis": "workstation date; E300 clock not used",
+  "user_confirmed_route": "SkyPort V3 -> custom board -> CP2102 pair -> E300 J3",
+  "user_confirmed_jumpers": {"JUMP_3_4_HIGH_PWR_REQ": "removed", "JUMP_7_8_ONLINE": "retained"},
+  "local_usb": {"device": "/dev/ttyUSB0", "path": "1-3", "vid_pid": "10c4:ea60", "driver": "cp210x"},
+  "preflight_passed": true,
+  "main_sha256": "5f917fb65bd7af60bab64c1434c475c195f0c5614524cd5871c32cb291c13d08",
+  "supervisor_sha256": "a79624e059b8a8195292660795407acfa83d29ab9ce380a9c6d875dcd5b60c4d",
+  "sdk_version": "V3.16.0-beta.0-build.2338",
+  "result": "Repeated UART0 identification failure; no successful aircraft or adapter identification",
+  "core_init_return_observed": false,
+  "probe_exit": 124,
+  "elapsed_monotonic_seconds": 45.008,
+  "elapsed_wall_seconds": 45.008,
+  "last_progress_not_final_totals": {
+    "approx_seconds": 40,
+    "tx_bytes": 25441,
+    "rx_bytes": 889,
+    "tx_errors": 0,
+    "rx_errors": 0,
+    "rx_by_selected_software_baud": {"115200": 633, "230400": 256, "460800": 0, "921600": 0, "1000000": 0},
+    "zero_bytes": 101,
+    "ff_bytes": 309
+  },
+  "postconditions": {
+    "supervisor_reported_settings_restored": true,
+    "no_port_holders": true,
+    "no_probe_process": true,
+    "boot_marker_unchanged": true,
+    "ttyS0_console_preserved": true
+  },
+  "voltage_requested_by_probe": false,
+  "interpretation": [
+    "Removing the external HIGH_PWR_REQ ground jumper did not improve the observed identification stage",
+    "Does not support continuous external grounding as the sole cause; does not exclude every power-on sequencing issue",
+    "Jumper state is user-reported, not remote pin voltage measurement",
+    "UART byte counts are not proof of valid DJI frames or measured physical baud"
+  ]
+}

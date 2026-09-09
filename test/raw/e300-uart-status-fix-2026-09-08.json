@@ -1,0 +1,40 @@
+{
+  "record_date": "2026-09-08",
+  "authorization": "User explicitly deferred restart-cause investigation and authorized continuing",
+  "change": "UART status accepts logical UART0 and UART1; unused UART1 reports success/disconnected; no fabricated connection",
+  "tests": {
+    "uart_status_ctest": "1 registered test passed; seven callback assertions; no UART I/O or SDK initialization",
+    "configuration_preflight": "seven checks passed",
+    "build_caution": "Clock skew required explicit CMake reconfiguration; initial no-tests-found was not counted as pass; clean-first compile/link completed"
+  },
+  "preparation": {
+    "kernel": "6.6.10",
+    "console_helper_sha256": "c9304e05ac02b56e730a40e9d2969ac31422e6de39d2113d65e2f38970a45b66",
+    "action": "Reloaded previously verified console helper after checking kernel and hash; no reboot requested"
+  },
+  "trial": {
+    "preflight": "passed console/getty/ownership guards",
+    "deadline_seconds": 45,
+    "exit_code": 124,
+    "stage": "UART0 connection identification",
+    "periodic_rx_bytes": 0,
+    "last_periodic_tx_bytes": 32377,
+    "periodic_tx_errors": 0,
+    "periodic_rx_errors": 0,
+    "elapsed_monotonic_seconds": 45.010,
+    "elapsed_wall_seconds": 45.010,
+    "fixed_status_callback_reached": false,
+    "supervisor_restored_termios": true
+  },
+  "post_trial": {
+    "same_kernel_boot_identity": true,
+    "root_fuser": "exit 1 and no output; no UART/console holders reported",
+    "sdk_process": "stopped",
+    "voltage_request": false
+  },
+  "limits": [
+    "Callback logic is unit-tested but not yet validated in a completed aircraft handshake",
+    "Unchanged boot identity covers this observation interval only; does not exclude later restart",
+    "Requested restoring the prior PC-configured bridge state before another aircraft attempt; cause of zero receive still unknown"
+  ]
+}

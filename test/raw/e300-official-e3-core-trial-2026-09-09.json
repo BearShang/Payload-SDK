@@ -1,0 +1,51 @@
+{
+  "observation_date": "2026-09-09",
+  "date_basis": "workstation date; E300 clock not used",
+  "user_confirmed_route": "M400 E3 -> official E-Port V2 board connector 1, switch 11 Expand, USB 12 -> aircraft-side CP2102 -> crossed UART -> E300-side CP2102 -> E300 J3",
+  "local_usb": {"device": "/dev/ttyUSB0", "path": "1-3", "vid_pid": "10c4:ea60", "driver": "cp210x", "ttyUSB1_exists": false},
+  "preflight_passed": true,
+  "main_sha256": "5f917fb65bd7af60bab64c1434c475c195f0c5614524cd5871c32cb291c13d08",
+  "supervisor_sha256": "a79624e059b8a8195292660795407acfa83d29ab9ce380a9c6d875dcd5b60c4d",
+  "sdk_version": "V3.16.0-beta.0-build.2338",
+  "identification": {
+    "aircraft_series": "Matrice 400",
+    "mount_type": "Extension Port V2",
+    "negotiated_uart_baud": 921600,
+    "payload_negotiate_finished": true,
+    "reported_usb_uart_identity": "10c4:ea60",
+    "aircraft_type": 103,
+    "adapter_type": 5,
+    "mount_position": 3,
+    "adapter_description": "Eport V2 ribbon cable",
+    "sdk_reported_license_level": "basic"
+  },
+  "core_init_rc": "0x0",
+  "base_info_rc": "0x0",
+  "io_at_core_init_return": {"tx_bytes": 6367, "rx_bytes": 39729, "tx_errors": 0, "rx_errors": 0},
+  "core_deinit_rc": "0xec",
+  "deinit_diagnostics": [
+    "Do not find command receive handle list.",
+    "Anti reg product information cmd handler error",
+    "SDK connection management deinit error"
+  ],
+  "probe_exit": 1,
+  "timeout": false,
+  "elapsed_monotonic_seconds": 14.289,
+  "elapsed_wall_seconds": 14.289,
+  "postconditions": {
+    "supervisor_reported_settings_restored": true,
+    "no_port_holders": true,
+    "no_probe_process": true,
+    "boot_marker_unchanged": true,
+    "ttyS0_console_preserved": true
+  },
+  "application_start_called": false,
+  "voltage_requested_by_probe": false,
+  "voltage_measured": false,
+  "interpretation": [
+    "Core initialization and base-info query succeeded on official board/E3 route with unchanged probe and application configuration",
+    "Deinitialization failed separately; overall process exit was not success",
+    "Changes from previous failing route include both custom-board bypass and aircraft adapter/port path, so result does not isolate a defective custom board",
+    "Negotiated baud is SDK evidence, not oscilloscope measurement or direct aircraft USB control-request capture"
+  ]
+}

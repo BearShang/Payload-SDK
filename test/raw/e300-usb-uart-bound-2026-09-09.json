@@ -1,0 +1,36 @@
+{
+  "date": "2026-09-09",
+  "scope": "CH340 replug diagnosis, scoped brltty exclusion, module installation and no-payload serial-open check",
+  "replug_evidence": [
+    "346.052687 ch341 1-3:1.0: ch341-uart converter detected",
+    "346.066670 usb 1-3: ch341-uart converter now attached to ttyUSB0",
+    "346.688632 usb 1-3: usbfs: interface 0 claimed by ch341 while 'brltty' sets config #1",
+    "346.695850 ch341-uart ttyUSB0: ch341-uart converter now disconnected from ttyUSB0"
+  ],
+  "confirmed_conflict": "brltty-udev.service was active; vendor 85-brltty.rules matches 1a86/7523 as a braille device",
+  "changes": [
+    "Installed /etc/udev/rules.d/99-psdk-ch340.rules, restricted to USB device 1-3 with VID/PID 1a86:7523 and sole SYSTEMD_WANTS=brltty-udev.service; clears only that event's braille properties and dependency",
+    "udevadm test passed; targeted change event readback no longer contains the brltty dependency",
+    "Stopped brltty-udev.service without masking or disabling the service or modifying vendor rules",
+    "Identity-guarded CH340 interface bind succeeded and created ttyUSB0",
+    "Installed hash-verified module at /lib/modules/6.6.10/extra/psdk-ch341/ch341.ko and ran depmod; modalias resolves to ch341"
+  ],
+  "module_sha256": "662282d5daa7d27a4a7b225e97721dd8de064a153f553149d1ee49655802ec0a",
+  "checks": {
+    "same_boot_before_after_conflict_fix": true,
+    "driver": "ch341",
+    "device": "/dev/ttyUSB0",
+    "exclusive_open": true,
+    "termios_460800_8n1_no_flow_readback": true,
+    "uart_payload_bytes_written": 0,
+    "termios_restored_and_fd_closed": true,
+    "ttyS0_console_preserved": true
+  },
+  "limits": [
+    "No reboot persistence test; the installed module is specific to kernel 6.6.10",
+    "Exclusion targets the observed USB path 1-3; moving ports or bus numbering changes requires review",
+    "No kernel Image/initramfs changes, ACPI changes, UART4 activation, PSDK execution or voltage request",
+    "Port opening and software termios readback do not verify aircraft communication or waveform baud",
+    "Aircraft-facing adapter identity remains to be confirmed by user"
+  ]
+}

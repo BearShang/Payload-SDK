@@ -1,0 +1,89 @@
+{
+  "date": "2026-09-08",
+  "scope": "Authorized reversible runtime console module; J10 connected to maintenance PC throughout; no aircraft communication, voltage request, firmware update or reboot.",
+  "implementation": {
+    "source_path": "tools/e300_uart_console/psdk_uart_console.c",
+    "source_sha256": "b0231170fb32206487dcc62ca8dec241cb062f6a6fbb5597e6e44d2765136885",
+    "makefile_sha256": "84869c2210a128d906329a5236a06535f10a6eb40a7789d16ad070da9c5f647d",
+    "validation_script_sha256": "7fa1a426c1b0fb03b8e005d0b1db965d0525bae5b2b5a5aea5f4bf8f36905083",
+    "module_sha256": "c9304e05ac02b56e730a40e9d2969ac31422e6de39d2113d65e2f38970a45b66",
+    "vermagic": "6.6.10 SMP preempt mod_unload aarch64",
+    "build": "Kbuild W=1 completed; compiler version mismatch warning: kernel GCC 11.2.0, build GCC 11.4.0."
+  },
+  "preflight": {
+    "flags": "0x17",
+    "write": "univ8250_console_write",
+    "device": "uart_console_device",
+    "setup": "univ8250_console_setup",
+    "exit": "univ8250_console_exit",
+    "dry_run": "passed without changing /proc/consoles",
+    "last_console_guard": "dry_run=0 without allow_last_console refused with -EBUSY; console unchanged",
+    "initial_guard_revision": "An initial exit==NULL restriction refused the standard 8250 exit callback with -EOPNOTSUPP. Audited upstream 6.6.10 callback, then narrowed acceptance to exact expected callback symbols."
+  },
+  "rollback_test": {
+    "method": "rmmod psdk_uart_console",
+    "readback": "ttyS0                -W- (EC p a)    4:64\n",
+    "marker_script_guard": "refused while ttyS0 console registered",
+    "reload": "passed; /proc/consoles empty"
+  },
+  "serial_test": {
+    "baud": 115200,
+    "format": "8N1, no flow control",
+    "host_received": "PSDK_E300_TO_PC_CHECK\n",
+    "device_received": "PSDK_PC_TO_E300_CHECK\n",
+    "passed": true,
+    "final_build_retested": true
+  },
+  "log_isolation": {
+    "console_loglevel": 4,
+    "initial_priority4_probe": "Inconclusive: same-level before marker did not print; not used as evidence.",
+    "priority3_control_before": "PSDK_KERNEL_CONTROL_BEFORE received on COM5 while console restored.",
+    "priority3_control_after": "PSDK_KERNEL_CONTROL_AFTER present in dmesg, zero COM5 characters during 3-second observation after detachment.",
+    "final_build": "PSDK_KERNEL_FINAL_ISOLATION_CHECK present in dmesg, zero COM5 characters during 3-second observation.",
+    "root_fuser_final": "No holders reported for /dev/ttyS0 or /dev/console."
+  },
+  "post_change": [
+    {
+      "command": "cat /proc/consoles",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "command": "lsmod | grep psdk_uart_console",
+      "exit_code": 0,
+      "output": "psdk_uart_console      12288  0\n"
+    },
+    {
+      "command": "cat /sys/module/psdk_uart_console/parameters/dry_run /sys/module/psdk_uart_console/parameters/allow_last_console",
+      "exit_code": 1,
+      "output": "cat: /sys/module/psdk_uart_console/parameters/dry_run: 权限不够\ncat: /sys/module/psdk_uart_console/parameters/allow_last_console: 权限不够\n"
+    },
+    {
+      "command": "systemctl show serial-getty@ttyS0.service -p ActiveState -p UnitFileState",
+      "exit_code": 0,
+      "output": "ActiveState=inactive\nUnitFileState=masked\n"
+    },
+    {
+      "command": "ls -l /dev/ttyS0",
+      "exit_code": 0,
+      "output": "crw-rw---- 1 root dialout 4, 64  7月 29 21:57 /dev/ttyS0\n"
+    },
+    {
+      "command": "cat /proc/sys/kernel/tainted",
+      "exit_code": 0,
+      "output": "4096\n"
+    },
+    {
+      "command": "systemctl show e300-ptp4l.service -p ActiveState -p SubState -p Result",
+      "exit_code": 0,
+      "output": "Result=success\nActiveState=activating\nSubState=start-pre\n"
+    }
+  ],
+  "persistence": "Module left loaded for current boot. No autoload service installed. Original U-Boot environment unchanged; reboot restores serial kernel console; getty remains masked.",
+  "limitations": [
+    "PC marker test is not aircraft enumeration or PSDK handshake.",
+    "Only 115200 tested, not higher SDK baud rates.",
+    "No claim that all kernel/hardware fault paths or suspend/resume are validated.",
+    "Device already had out-of-tree taint 4096 before test; final value unchanged."
+  ]
+}

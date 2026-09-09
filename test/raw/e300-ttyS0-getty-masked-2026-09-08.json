@@ -1,0 +1,31 @@
+{
+  "date": "2026-09-08",
+  "scope": "Post-change readback after authorized masking of serial-getty@ttyS0; kernel console remains active. No serial data transmission, reboot or SDK execution.",
+  "records": [
+    {
+      "command": "systemctl is-active serial-getty@ttyS0.service",
+      "exit_code": 1,
+      "output": "inactive\n"
+    },
+    {
+      "command": "systemctl is-enabled serial-getty@ttyS0.service",
+      "exit_code": 1,
+      "output": "masked\n"
+    },
+    {
+      "command": "cat /proc/consoles",
+      "exit_code": 0,
+      "output": "ttyS0                -W- (EC p a)    4:64\n"
+    },
+    {
+      "command": "cat /sys/class/tty/ttyS0/iomem_base",
+      "exit_code": 0,
+      "output": "0x47000\n"
+    },
+    {
+      "command": "readlink /etc/systemd/system/serial-getty@ttyS0.service",
+      "exit_code": 0,
+      "output": "/dev/null\n"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "record_date": "2026-09-08",
+  "user_connection": "External USB-UART bridge connects PC COM6 to E300 UART4; TX/RX orientation uncertain",
+  "windows_pnp": {"status": "OK", "class": "Ports", "friendly_name": "Silicon Labs CP210x USB to UART Bridge (COM6)"},
+  "e300_observations": {
+    "proc_tty_driver": "M1000_uart /dev/ttyMT 253 0-6 serial",
+    "dev_ttyMT_nodes": [],
+    "mthreads_uart_bound_devices": [],
+    "mthreads_uart_driver_directory_entries": ["uevent"],
+    "proc_tty_driver_M1000_uart": "serinfo:1.0 driver revision:",
+    "boot_config": ["CONFIG_SERIAL_MTHREADS=y", "CONFIG_SERIAL_MTHREADS_CONSOLE=y"],
+    "ttyS0": "16550A, mmio 0x00047000, active kernel console",
+    "ttyS1_to_ttyS3": "unknown UART, port zero",
+    "kernel_log_matching_ttyMT_or_mthreads_uart": [],
+    "acpi_device_path_name_matches_UART_URT_SER_digit": []
+  },
+  "interpretation": "Driver registered but no usable UART0-6 device instance observed; exact firmware enumeration or pinmux cause not established",
+  "actions": {
+    "serial_ports_opened": false,
+    "test_payload_sent": false,
+    "wiring_swap_requested": false,
+    "kernel_or_firmware_changed": false,
+    "console_helper_loaded": false,
+    "sdk_run": false,
+    "reboot_requested": false
+  },
+  "limits": ["COM enumeration is not end-to-end UART verification", "No receive test occurred, so TX/RX reversal cannot be diagnosed", "ACPI name filtering is not complete AML analysis"]
+}

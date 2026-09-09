@@ -1,0 +1,24 @@
+{
+  "date": "2026-09-09",
+  "route": "E300 J3 USB host to external CH340; crossed UART to second aircraft-facing USB-UART adapter",
+  "user_report": "Both UART sides are 3.3 V; cross-connected TX/RX and common ground with VCC not interconnected; user has tested bidirectional traffic",
+  "user_authorization": "Driver installation, including kernel integration if convenient; chose separate module instead",
+  "usb_id": "1a86:7523",
+  "kernel": "6.6.10 aarch64",
+  "original_config": {"USB_SERIAL": "m", "USB_SERIAL_CH341": "not set", "MODVERSIONS": "not set"},
+  "source_url": "https://raw.githubusercontent.com/gregkh/linux/v6.6.10/drivers/usb/serial/ch341.c",
+  "source_sha256": "b286d49dd1f2a3a8f96188888b4df7869f65c4d9bead51d5291d50150b235951",
+  "module_sha256": "662282d5daa7d27a4a7b225e97721dd8de064a153f553149d1ee49655802ec0a",
+  "build": "Succeeded with compiler-version warning: kernel GCC 11.2.0, module GCC 11.4.0",
+  "vermagic": "6.6.10 SMP preempt mod_unload aarch64",
+  "observations": [
+    "usbserial and ch341 loaded; same boot identifier before and after load",
+    "Kernel logged USB Serial support registered for ch341-uart",
+    "No ttyUSB device node and no CH340 interface driver symlink",
+    "USB interface authorization and USB bus autoprobe are both 1",
+    "Explicit identity-guarded bind returned errno 16 Device or resource busy",
+    "fuser of the current USB device node found no owner; cause of EBUSY remains unknown",
+    "ttyS0 console remains active; prior console-detachment module absent"
+  ],
+  "not_performed": ["reboot", "permanent module installation", "kernel replacement", "ACPI changes", "serial payload transmission", "PSDK initialization", "power request"]
+}

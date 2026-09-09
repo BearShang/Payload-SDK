@@ -1,0 +1,56 @@
+{
+  "record_date": "2026-09-08",
+  "authorization": "Explicit user permission for one controlled temporary boot trial, with restoration via the original boot path on failure",
+  "preparation": {
+    "original_Image_sha256": "ce510ef53d94eb077bf1765aa43e13e0c2d63304d1e7627b63e1c68243013c66",
+    "efi_initrd_utf16_signature_found": true,
+    "independent_boot_file": "psdk-uart4.cpio",
+    "cpio_sha256": "b05d61b34f063e1b92f2984a4f9ccfb5c5128ed7cfbdebcd37928d6081143e98",
+    "cpio_bytes": 56832,
+    "original_boot_files_overwritten": false,
+    "recovery_port": "COM5",
+    "external_bridge": "COM6"
+  },
+  "temporary_boot": {
+    "uboot": "2025.04-g9fbac6720652",
+    "original_bootcmd": "run nvmeboota;",
+    "kernel": "Image",
+    "saved_environment_changed": false,
+    "boot_argument_change": "Only add initrd with an EFI absolute path to the independent test file; keep original ACPI, root and UART7 console arguments",
+    "argument_readback": "Double-quoted and variable-expanded attempts did not preserve the expected value; corrected and verified using a complete single-quoted argument string before boot",
+    "efi_loaded_initrd": true,
+    "acpi_table_upgrade_logged": true,
+    "live_dsdt_sha256": "3e0cbf96ed65b99d42b6b791bd3cf594fc5e62faa5329bc86d8e94a2a20644db",
+    "uart4_status": 15,
+    "driver_error": "mthreads-uart MCOM0001:00: Unable to set dma mask",
+    "probe_error": -5,
+    "ttyMT_nodes": [],
+    "ssh_recovered": true,
+    "observed_uptime_seconds": 104.98,
+    "console_helper_present": false
+  },
+  "restoration": {
+    "normal_reboot_to_original_saved_path": true,
+    "original_dsdt_sha256": "ff78c38fdaa33ad52e88f5e5283e789db42dc7b3a1605b8c4ac35aa1b3d785c2",
+    "original_Image_sha256_unchanged": true,
+    "uart4_status": 0,
+    "initrd_argument_absent": true,
+    "test_boot_file_removed_after_exact_hash_check": true,
+    "boot_partition_unmounted": true,
+    "ssh_available": true,
+    "observed_uptime_seconds": 132.30,
+    "COM5_closed": true,
+    "existing_ptp_service": "activating/start-pre, Result=success; not modified, not evidence of synchronization success"
+  },
+  "active_kernel_ACPI_CCA_REQUIRED": true,
+  "explicit_normal_reboots_this_trial": 2,
+  "uart4_payload_sent": false,
+  "wire_swap_requested": false,
+  "SDK_run": false,
+  "voltage_request": false,
+  "limits": [
+    "The temporary table mechanism worked, but UART4 initialization and end-to-end communication did not",
+    "DMA error is observed; missing or inherited _CCA and driver requirements need further audit before asserting root cause",
+    "No DMA attribute, pinmux, or driver patch was applied after the failure"
+  ]
+}

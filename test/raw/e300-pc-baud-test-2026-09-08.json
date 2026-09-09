@@ -1,0 +1,25 @@
+{
+  "record_date": "2026-09-08",
+  "connection": "User confirmed J10 disconnected from custom board and connected to maintenance PC",
+  "pc_device": "CP210x COM5, VID 10C4 PID EA60, present and OK; unique identity omitted",
+  "preflight": "proc/consoles empty; each remote test required root and refused existing UART/console holders",
+  "framing": "8 data bits, no parity, 1 stop bit, no flow control",
+  "payload": "All byte values 0..255 repeated 16 times; reverse payload XOR 0xa5; PC sends final acknowledgement after exact reverse comparison",
+  "payload_sha256": "c8f5d0341d54d951a71b136e6e2afcb14d11ed8489a7ae126a8fee0df6ecf193",
+  "implementation": {
+    "tools/e300_uart_console/validate_baud.py": "a010fddea25d099284a5b21f19540712ef9e3e5580ec5619485e23000eb2c8a3",
+    "tools/e300_uart_console/test_baud_pc.ps1": "a3455f33010b3dcd9c7660466f882f346b1f7bba082decca05c202e736a9d32f"
+  },
+  "trials": [
+    {"baud": 115200, "pc_to_e300_bytes": 4096, "pc_to_e300_exact": true, "e300_to_pc_bytes": 4096, "e300_to_pc_exact": true, "remote_termios_readback_match": true, "reverse_ack_received": true, "exit_code": 0},
+    {"baud": 460800, "pc_to_e300_bytes": 4096, "pc_to_e300_exact": true, "e300_to_pc_bytes": 4096, "e300_to_pc_exact": true, "remote_termios_readback_match": true, "reverse_ack_received": true, "exit_code": 0},
+    {"baud": 921600, "pc_to_e300_bytes": 4096, "pc_to_e300_exact": true, "e300_to_pc_bytes": 4096, "e300_to_pc_exact": true, "remote_termios_readback_match": true, "reverse_ack_received": true, "exit_code": 0}
+  ],
+  "cleanup": "Each remote trial reported UART_SETTINGS_RESTORED; local COM handle closed; final root fuser had exit 1 and no output",
+  "limits": [
+    "One 4096-byte transfer per direction at each baud; not a duration/stress or maximum-throughput qualification",
+    "PC was USB host; not an in-place readback of M400 bridge settings or proof of M400 USB enumeration",
+    "No measured waveform, SDK protocol, SDK core initialization or voltage request in this test",
+    "J10 remains connected to maintenance PC after the test; console helper not unloaded"
+  ]
+}

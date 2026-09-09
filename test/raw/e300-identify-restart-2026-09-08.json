@@ -1,0 +1,53 @@
+{
+  "record_date": "2026-09-08",
+  "scope": "One bounded SDK core trial after user reconnected J10, followed by read-only restart investigation",
+  "sdk_trial": {
+    "preflight": "console released, getty masked, no existing UART/console holders",
+    "identified_mount_type": "Extension Port V2 Type",
+    "identified_aircraft_series": "Matrice 400 Series",
+    "identified_uart_baud": 921600,
+    "usb_uart_identity_callback_called": true,
+    "reported_vid_pid": "10c4:ea60",
+    "payload_negotiate_finished": true,
+    "core_init_rc": "0xec",
+    "tx_bytes": 1406,
+    "rx_bytes": 12751,
+    "tx_errors": 0,
+    "rx_errors": 0,
+    "error_location": "dji_identity_verify.c:112",
+    "error_message": "Get uart status error, returnCode = 227",
+    "core_error_location": "dji_core.c:246",
+    "core_error_message": "SDK identity verify init error.",
+    "elapsed_monotonic_seconds": 12.034,
+    "elapsed_wall_seconds": 12.034,
+    "supervisor_restored_termios": true,
+    "exit_code": 1,
+    "base_info_api_reached": false,
+    "voltage_request": false
+  },
+  "subsequent_restart": {
+    "user_report": "User observed another E300 restart and asked whether the task initiated it",
+    "observed_uptime_seconds": 53.47,
+    "proc_consoles": "ttyS0 -W- (EC p a) 4:64",
+    "console_helper_present": false,
+    "task_reboot_or_poweroff_command_this_round": false,
+    "cause": "unknown; indirect relationship to SDK execution or console adaptation not excluded"
+  },
+  "read_only_investigation": {
+    "pstore": "empty",
+    "sys_class_watchdog": "no entries",
+    "systemd_RuntimeWatchdogUSec": "0",
+    "systemd_RebootWatchdogUSec": "10min",
+    "systemd_KExecWatchdogUSec": "0",
+    "journal_current_boot_matches_kernel": true,
+    "prior_journal": "Contains orderly power-off messages, but no matching remote_probe.py or console-helper entries were found; not reliably attributable to the just-ended trial",
+    "current_dmesg_error_scope": "Display/audio initialization and duplicate-symbol messages; no cause for previous restart established",
+    "executable_dynamic_symbols": "No reboot/system/exec imports observed; not proof against all indirect reset paths"
+  },
+  "next_state": {
+    "sdk_testing": "paused",
+    "module_reloaded_after_restart": false,
+    "uart_status_fix_applied": false,
+    "notes": "Review status callback handling before any resumed trial. Exact queried logical port was not logged; do not claim a specific port number was observed. No forced reproduction or voltage request."
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "record_date": "2026-09-08",
+  "scope": "Read-only running ACPI and kernel capability audit; offline ACPI disassembly",
+  "dsdt": {
+    "sha256": "ff78c38fdaa33ad52e88f5e5283e789db42dc7b3a1605b8c4ac35aa1b3d785c2",
+    "length_bytes": 56043,
+    "oem_id": "AB100",
+    "oem_table_id": "AB100Ds",
+    "oem_revision_hex": "0x00000200",
+    "iasl_version": "20200925",
+    "disassembly_completed": true,
+    "uart4": {
+      "namespace_path": "\\_SB.COM1",
+      "hid": "MCOM0001",
+      "uid": 1,
+      "serial_id": 4,
+      "sta_method": "Return (Zero)",
+      "memory_base_hex": "0x0071B000",
+      "memory_length_hex": "0x00001000",
+      "interrupt_hex": "0x38",
+      "clock_frequency_property_hz": 4000000,
+      "clock_property_is_not_measurement": true,
+      "sysfs_device": "MCOM0001:00",
+      "sysfs_status": 0
+    },
+    "uart0": {"namespace_path": "\\_SB.COM0", "sysfs_device": "MCOM0001:01", "sysfs_status": 0},
+    "uart7": {"namespace_path": "\\_SB.COM7", "hid": "HISI0031", "sta_method": "Return (0x0F)"}
+  },
+  "running_kernel_config": {
+    "source": "/proc/config.gz",
+    "CONFIG_ACPI_TABLE_UPGRADE": "y",
+    "CONFIG_ACPI_CUSTOM_METHOD": "not set",
+    "CONFIG_ACPI_CONFIGFS": "not set",
+    "CONFIG_SERIAL_MTHREADS": "y",
+    "CONFIG_SERIAL_MTHREADS_CONSOLE": "y"
+  },
+  "pinctrl_debugfs": "devices, maps, and handles contain headers only; current mux not established",
+  "offline_tools": "Downloaded distribution acpica-tools 20200925-6 ARM64 and extracted in a dedicated home-directory audit folder; not installed system-wide",
+  "reference_hardware_review": {
+    "module_spec_sha256": "d97abfb981a54ac820ec69c3597ab069830054a36a592d89486b8d112bf59331",
+    "module_spec_page": 13,
+    "uart4_rxd_txd": "CMOS 1.8 V at E3-4 and E3-6; visually verified",
+    "uart7_rxd_txd": "CMOS 3.3 V at pins 19 and 21; visually verified",
+    "baseboard_schematic_sha256": "fb36040c76f54cc0ac9a46034f8d1f21b035af007dc9eaef89e4b48dd4d73547",
+    "baseboard_schematic_page": 33,
+    "uart4_breakout": "J26 pin 1 TX, pin 3 RX through zero-ohm resistors with ESD protection; no level shifter shown on this path; reference design, actual assembly unverified"
+  },
+  "disposition": "Wait for external adapter model or TX/RX logic-level confirmation; advised disconnecting signal wires if uncertain; no serial test, ACPI load, pinmux change, reboot, or SDK execution",
+  "limits": [
+    "Disabled UART4 status explains absent Linux port but does not establish that changing status alone will provide working hardware",
+    "Clock, pinmux, driver behavior, actual header wiring and logic compatibility remain to be verified",
+    "Initrd table upgrade is a candidate requiring confirmed boot path and rollback, not a tested or deployed change",
+    "External USB-UART VCC selection does not by itself establish TX/RX logic levels"
+  ]
+}

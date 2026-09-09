@@ -1,0 +1,44 @@
+{
+  "record_date": "2026-09-08",
+  "kind": "selected_engineering_observations_not_full_transcript",
+  "connection": "User reconfirmed M400 on and J10 connected to custom board, then confirmed J10 USB replug",
+  "sdk_runtime_banner": "V3.16.0-beta.0-build.2338 Mar 11 2026 10:45:38",
+  "configured_baud": 460800,
+  "observed_uart_baud_selections": [115200, 460800, 230400, 921600, 1000000],
+  "sdk_diagnostic": {
+    "source_location_reported": "dji_access_adapter.c:322",
+    "message": "Try identify UART0 connection failed. Probably because SDK adapter or aircraft not finish init or UART connect error.",
+    "first_observed_seconds": 3.214,
+    "last_observed_seconds": 44.342
+  },
+  "trial": {
+    "deadline_seconds": 45,
+    "exit_code": 124,
+    "rx_at_all_periodic_observations": 0,
+    "tx_at_40_seconds": 32377,
+    "core_init_return_observed": false,
+    "base_info_queried": false,
+    "voltage_request": false,
+    "supervisor_restored_termios": true
+  },
+  "post_trial_kernel_uart": {
+    "type": "16550A",
+    "mmio": "0x00047000",
+    "irq": 20,
+    "tx_cumulative": 117267,
+    "rx_cumulative": 0,
+    "note": "Kernel counters are cumulative for the current driver lifetime, not per-trial byte counts"
+  },
+  "post_trial_cleanup": {
+    "root_fuser_uart_and_console": "exit 1 and no output: no holders reported",
+    "proc_consoles": "empty",
+    "preflight_regression": "7 checks passed without UART I/O",
+    "supervisor_python_compile": "passed"
+  },
+  "limits": [
+    "Failure observed at UART connection / adapter identification, before successful core initialization",
+    "Baud selections are termios requests, not measured waveform rates or proof of matching CP2102N host settings",
+    "No claim that application credentials are invalid or that USB host enumeration succeeded",
+    "No UART waveform, USB capture or 24 V measurement was performed"
+  ]
+}

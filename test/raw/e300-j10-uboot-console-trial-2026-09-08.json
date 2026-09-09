@@ -1,0 +1,52 @@
+{
+  "date": "2026-09-08",
+  "scope": "J10 to Windows serial verification; one RAM-only U-Boot console trial followed by reboot to original saved environment. Selected outputs only; identifiers and unrelated boot logs omitted.",
+  "serial": {
+    "port": "COM5",
+    "vid": "10C4",
+    "pid": "EA60",
+    "settings": "115200 8N1, no flow control",
+    "received_probe": "PSDK_CONSOLE_LINK_CHECK"
+  },
+  "uboot": {
+    "version": "2025.04-g9fbac6720652 (Aug 11 2025 - 08:22:38 +0000)",
+    "prompt": "Press <SPACE> key to stop autoboot in  2s",
+    "bootcmd": "run nvmeboota;",
+    "nvmeparamacpi": "${acpipara} root=/dev/nvme0n1p2 rootwait",
+    "acpipara_before": "setenv bootargs rw acpi=on acpi_rsdp=${acpi_rsdp} console=ttyS0,115200n8",
+    "acpipara_trial": "setenv bootargs rw acpi=on acpi_rsdp=${acpi_rsdp} console=tty0",
+    "saved_to_flash": false,
+    "acpipara_after_reboot": "setenv bootargs rw acpi=on acpi_rsdp=${acpi_rsdp} console=ttyS0,115200n8"
+  },
+  "trial_console_readback": "tty0                 -WU (EC p  )    4:1\nttyS0                -W- (E  p a)    4:64\n",
+  "kernel_image_checks": {
+    "boot_partition_Image_sha256": "ce510ef53d94eb077bf1765aa43e13e0c2d63304d1e7627b63e1c68243013c66",
+    "decompressed_boot_vmlinuz_6_6_10_sha256": "1ece185aeb36f985d0aa6a62d2c41ae4d577c32939914e4fe53ffcfb9104f87b",
+    "actual_Image_strings_query": "strings /mnt/psdk-boot-inspect/Image | grep -E '^(nospcr|console=)$'",
+    "actual_Image_strings_output": "console=\n",
+    "interpretation": "Image and decompressed /boot/vmlinuz differ. Absence of nospcr string is supporting evidence, not a direct boot test of that parameter."
+  },
+  "post_restore_records": [
+    {
+      "command": "cat /proc/consoles",
+      "exit_code": 0,
+      "output": "ttyS0                -W- (EC p a)    4:64\n"
+    },
+    {
+      "command": "systemctl show serial-getty@ttyS0.service -p ActiveState -p UnitFileState",
+      "exit_code": 0,
+      "output": "ActiveState=inactive\nUnitFileState=masked\n"
+    },
+    {
+      "command": "uname -r",
+      "exit_code": 0,
+      "output": "6.6.10\n"
+    }
+  ],
+  "limitations": [
+    "No PSDK execution or 24 V request.",
+    "Linux serial console is not released.",
+    "PC enumeration does not prove aircraft enumeration.",
+    "No kernel binary, ACPI table or saved U-Boot environment modified."
+  ]
+}

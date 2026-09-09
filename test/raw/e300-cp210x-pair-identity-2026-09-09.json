@@ -1,0 +1,19 @@
+{
+  "date": "2026-09-09",
+  "user_action": "Moved aircraft-facing adapter USB from custom board to E300 J1; original J3 adapter and crossed UART wires unchanged",
+  "adapters": [
+    {"role": "original E300 side", "tty": "ttyUSB0", "usb_path": "1-3", "vid": "10c4", "pid": "ea60", "bcdDevice": "0100", "driver": "cp210x"},
+    {"role": "former aircraft side, now J1", "tty": "ttyUSB1", "usb_path": "1-2", "vid": "10c4", "pid": "ea60", "bcdDevice": "0100", "driver": "cp210x"}
+  ],
+  "descriptor_comparison": "Both have one configuration, one interface, device class 00, interface class ff/subclass 00/protocol 00, two endpoints",
+  "new_adapter_read": {
+    "selection": "Resolved ttyUSB1 sysfs USB parent and matched libusb device by bus/address; not first VID/PID match",
+    "request": "IN 0xc0/0xff, wValue 0x370b, wIndex 0",
+    "requested_1_byte_returned": 1,
+    "requested_2_bytes_returned": 1,
+    "part_number": "0x02 (CP2102 per upstream mapping)",
+    "driver_after": "cp210x"
+  },
+  "not_performed": ["UART open or payload transmission", "kernel driver detach", "USB reset", "EEPROM write", "PSDK execution", "power request", "reboot"],
+  "limits": ["Adapter is now enumerated by E300, not the aircraft", "Matching identity does not prove authenticity or successful aircraft-host initialization", "Baud rate and line settings from the previous aircraft connection were not read back"]
+}

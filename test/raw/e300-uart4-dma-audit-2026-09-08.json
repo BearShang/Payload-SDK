@@ -1,0 +1,38 @@
+{
+  "date": "2026-09-08",
+  "scope": "Read-only static audit of the actual boot Image and current ACPI description; no UART traffic or new boot trial",
+  "image_sha256": "ce510ef53d94eb077bf1765aa43e13e0c2d63304d1e7627b63e1c68243013c66",
+  "method": "Read-only mount of boot partition, hash guard, AArch64 objdump of raw Image; function offsets derived from running kernel kallsyms relative to _text; unmounted in finally",
+  "selected_image_evidence": [
+    {"offset": "0x737aac", "function": "mthreads_serial_probe", "observation": "Loads port device; sets x1 to all 64 bits one; calls dma_set_mask at 0x737ab8. Nonzero return branches to error reporting and cleanup."},
+    {"offset": "0x1241758", "observation": "NUL-terminated string: Unable to set dma mask\\n; referenced by probe error path at 0x737ac8-0x737ad0."},
+    {"offset": "0x737afc", "observation": "Success path calls dma_set_coherent_mask with all 64 bits one, then dma_alloc_attrs for 4096 bytes; uart_add_one_port is later at 0x737bc4."},
+    {"offset": "0x62fea4", "function": "acpi_dma_supported", "observation": "Returns zero for NULL, otherwise extracts bit 11 from flags at device offset 116."},
+    {"offset": "0x62febc", "function": "acpi_get_dma_attr", "observation": "Returns zero when flags bit 11 is clear; otherwise returns 1 plus bit 10."},
+    {"offset": "0x62e874", "function": "acpi_dma_configure_id", "observation": "For attr zero, writes address at Image-relative 0xe5c468 (dma_dummy_ops per kallsyms) to device offset 568, and returns success."},
+    {"offset": "0x7756dc", "function": "platform_dma_configure", "observation": "ACPI branch calls acpi_get_dma_attr followed by acpi_dma_configure_id."},
+    {"offset": "0x10d29c", "function": "dma_set_mask", "observation": "Returns -5 if dma_mask pointer is NULL or the selected dma_supported callback returns false."},
+    {"offset": "0x10f50c", "function": "dma_dummy_supported", "observation": "Returns zero unconditionally."},
+    {"offset": "0x6bd050", "function": "daa_init", "observation": "Reviewed function body. Called before dma_set_mask with integer arguments 2 and serial_id. Contains MMIO mapping/writes; does not receive device pointer. This audit did not execute it."}
+  ],
+  "header_crosscheck": "Installed linux-headers-6.6.10/include/acpi/acpi_bus.h declares coherent_dma at bit 10 and cca_seen at bit 11. Headers alone are not proof of all running-kernel layouts.",
+  "acpi_description": {
+    "device": "\\_SB_.COM1",
+    "hid": "MCOM0001",
+    "serial_id": 4,
+    "cca_in_device": false,
+    "clock_frequency": 4000000,
+    "mmio_base": "0x0071b000",
+    "interrupt": "0x38",
+    "clock_references_in_device": false
+  },
+  "interpretation": "Missing applicable _CCA is strongly supported as a cause of DMA rejection, not proof of absent hardware DMA. Exact live dma_ops/cca_seen values during failed probe were not captured. No coherent/noncoherent value has been established for UART4.",
+  "limits": [
+    "No vendor UART source found in installed headers or matching source filenames in supplied MTT_E300 reference project.",
+    "No PIO fallback on the reviewed probe DMA-failure path; this does not prove every driver function lacks PIO.",
+    "Clock rate, pinmux, interrupt and DMA routing still need vendor-board configuration evidence.",
+    "A raw Image function-pointer slot read as zero before boot relocation; it was not used as live pointer evidence.",
+    "No /proc/kcore access, runtime module load, firmware edit, _CCA patch, reboot, SDK execution or power request."
+  ],
+  "end_state": {"uart4_acpi_status": 0, "ttyMT_nodes": [], "audit_mount_unmounted": true}
+}

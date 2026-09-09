@@ -1,0 +1,3 @@
+# This CH340 on the observed J3 USB path is a UART bridge, not a braille display.
+# Leave devices on other USB paths and other systemd dependencies untouched.
+SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", KERNEL=="1-3", ATTR{idVendor}=="1a86", ATTR{idProduct}=="7523", ENV{SYSTEMD_WANTS}=="brltty-udev.service", ENV{SYSTEMD_WANTS}="", ENV{BRLTTY_BRAILLE_DRIVER}="", ENV{BRLTTY_BRAILLE_DEVICE}="", ENV{BRLTTY_PID_FILE}=""

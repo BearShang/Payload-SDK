@@ -1,0 +1,39 @@
+{
+  "recorded_at": "2026-09-08",
+  "sequence": "After the user reported connecting the custom board USB2 connector to E300.",
+  "target": "User-designated E300; address, account and credentials intentionally omitted.",
+  "scope": "Read-only recheck. No USB role/configuration changes, SDK execution or voltage application.",
+  "observations": [
+    {
+      "command": "lsusb -t",
+      "exit_code": 0,
+      "stdout_stderr": "/:  Bus 10.Port 1: Dev 1, Class=root_hub, Driver=xhci-m1000/1p, 10000M\n/:  Bus 09.Port 1: Dev 1, Class=root_hub, Driver=xhci-m1000/1p, 480M\n/:  Bus 08.Port 1: Dev 1, Class=root_hub, Driver=xhci-m1000/1p, 10000M\n/:  Bus 07.Port 1: Dev 1, Class=root_hub, Driver=xhci-m1000/1p, 480M\n/:  Bus 06.Port 1: Dev 1, Class=root_hub, Driver=xhci-m1000/1p, 10000M\n/:  Bus 05.Port 1: Dev 1, Class=root_hub, Driver=xhci-m1000/1p, 480M\n/:  Bus 04.Port 1: Dev 1, Class=root_hub, Driver=xhci-m1000/1p, 10000M\n/:  Bus 03.Port 1: Dev 1, Class=root_hub, Driver=xhci-m1000/1p, 480M\n/:  Bus 02.Port 1: Dev 1, Class=root_hub, Driver=xhci_hcd/4p, 5000M\n/:  Bus 01.Port 1: Dev 1, Class=root_hub, Driver=xhci_hcd/4p, 480M\n"
+    },
+    {
+      "command": "ls -l /sys/class/udc",
+      "exit_code": 0,
+      "stdout_stderr": "\u603b\u8ba1 0\n"
+    },
+    {
+      "command": "grep -H . /sys/class/usb_role/*/role",
+      "exit_code": 0,
+      "stdout_stderr": "/sys/class/usb_role/UPHY0001:00-role-switch/role:none\n/sys/class/usb_role/UPHY0001:01-role-switch/role:none\n/sys/class/usb_role/UPHY0001:02-role-switch/role:none\n/sys/class/usb_role/UPHY0001:03-role-switch/role:none\n"
+    },
+    {
+      "command": "find /dev -maxdepth 1 -name 'ttyUSB*' -o -name 'ttyACM*' -o -name 'ttyGS*'",
+      "exit_code": 0,
+      "stdout_stderr": ""
+    },
+    {
+      "command": "journalctl -k -b --no-pager -o cat -n 30 --grep='USB disconnect|new .* USB device|device descriptor read|unable to enumerate|over-current|Cannot enable|udc|role.switch'",
+      "exit_code": 1,
+      "stdout_stderr": ""
+    },
+    {
+      "command": "lsusb",
+      "exit_code": 0,
+      "stdout_stderr": "Bus 009 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub\nBus 010 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub\nBus 008 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub\nBus 007 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub\nBus 006 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub\nBus 005 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub\nBus 004 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub\nBus 003 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub\nBus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub\nBus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub\n"
+    }
+  ]
+}
+

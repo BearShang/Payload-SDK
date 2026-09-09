@@ -1,0 +1,24 @@
+{
+  "record_date": "2026-09-08",
+  "user_report": "External level shifter installed; TX/RX confirmed 1.8 V; J10 reconnected to PC",
+  "recovery_console": {"port": "COM5", "baud": 115200, "marker_received": true, "remote_marker_write_exit": 0, "port_closed_after_test": true},
+  "external_bridge": {"port": "COM6", "pnp_status": "OK", "uart4_payload_test_started": false},
+  "original_dsdt_sha256": "ff78c38fdaa33ad52e88f5e5283e789db42dc7b3a1605b8c4ac35aa1b3d785c2",
+  "rejected_full_recompile": {"sha256": "657151a2d8bba95c7b632efcfe42c5a0f22b97d62b8a765c52ab467bfe542ea9", "reason": "Baseline recompile changed AML body outside intended UART4 change", "loaded": false},
+  "minimal_candidate": {
+    "sha256": "3e0cbf96ed65b99d42b6b791bd3cf594fc5e62faa5329bc86d8e94a2a20644db",
+    "bytes": 56044,
+    "cpio_sha256": "b05d61b34f063e1b92f2984a4f9ccfb5c5128ed7cfbdebcd37928d6081143e98",
+    "cpio_bytes": 56832,
+    "change": "UART4 COM1 _STA Zero to 0x0F, three enclosing AML package lengths, table length, OEM revision to 0x201, checksum",
+    "checksum_ok": true,
+    "inverse_patch_restores_original_exactly": true,
+    "independent_iasl_disassembly_matches_reviewed_source": true,
+    "archive_listing_checked": true,
+    "loaded": false
+  },
+  "local_guard_tests": {"count": 7, "passed": 7},
+  "current_state": {"uart4_acpi_status": 0, "ttyS0_kernel_console": "enabled", "boot_files_changed": false, "reboot_requested": false, "sdk_run": false, "voltage_requested": false},
+  "next_boundary": "Confirm explicit controlled reboot approval; retain COM5 recovery; verify EFI initrd path before a temporary boot",
+  "limits": ["Offline checks do not prove UART4 pinmux, clock, enumeration, or communication", "User-reported 1.8 V is not an agent measurement", "Do not use rejected full-recompile binary"]
+}

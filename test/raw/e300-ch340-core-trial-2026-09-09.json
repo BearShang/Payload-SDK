@@ -1,0 +1,37 @@
+{
+  "date": "2026-09-09",
+  "user_report": "Aircraft-facing adapter is CH340; interpreted as both adapters being CH340",
+  "transport": "usb-ch340",
+  "device": "/dev/ttyUSB0",
+  "configured_aircraft_adapter": "1a86:7523",
+  "main_c_sha256": "a896b3adb7bcabf0d7d7fa75ad710261a86a73d9b418994c7699c70a391f10bc",
+  "checks": [
+    "ARM64 compilation/linking succeeded; existing OSAL unused-parameter warning and remote-clock build warnings retained",
+    "CTest passed UART status and adapter identity/null checks",
+    "Eight configuration --check cases passed without UART access",
+    "PowerShell parser check and real private-configuration --check passed",
+    "Local CH340 USB identity/driver and no-port-owner preflight passed"
+  ],
+  "runtime": {
+    "sdk_banner": "V3.16.0-beta.0-build.2338 Mar 11 2026 10:45:38",
+    "probe_exit": 124,
+    "elapsed_monotonic_seconds": 45.004,
+    "elapsed_wall_seconds": 45.004,
+    "last_visible_progress_seconds": 40,
+    "last_visible_tx_bytes": 28475,
+    "last_visible_rx_bytes": 10986,
+    "last_visible_tx_errors": 0,
+    "last_visible_rx_errors": 0,
+    "identification": "Repeated Try identify UART0 connection failed; no successful aircraft identification or core_init return before timeout",
+    "uart_settings_restored": true,
+    "same_boot_before_after": true,
+    "postcheck": "ttyUSB0 present, no fuser holder or e300_psdk_probe process, brltty-udev inactive"
+  },
+  "followup": "After this trial, checked DJI E-Port V2/SkyPort V3 official chip guidance: FT232 and CP2102 listed, CH340 not listed. Do not claim CH340 is proven supported or that its absence alone proves the runtime root cause. Stop retrying until aircraft-facing supported adapter is available.",
+  "limits": [
+    "RX bytes do not prove valid DJI frames or an authenticated handshake",
+    "Progress counts are the last visible 40-second sample, not exact final totals",
+    "No power-management, flight-control, reboot or kernel/ACPI changes during probe",
+    "Streaming log repeated-line suppression was corrected and unit-checked after this trial; no second aircraft trial run"
+  ]
+}

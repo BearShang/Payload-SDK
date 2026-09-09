@@ -1,0 +1,54 @@
+{
+  "record_date": "2026-09-08",
+  "kind": "selected_engineering_observations_not_full_transcript",
+  "sdk_version": "3.16.0 build 2338",
+  "target_reported_by_user": "M400 / SkyPort V3 / custom board / E300 J10",
+  "private_configuration": "User-designated prior working application header read in memory; values and source identity omitted",
+  "configured_baud": 460800,
+  "scope": "SDK core initialization and base-information query only; no application modules or voltage request",
+  "first_trial": {
+    "preflight": "console released, getty masked/inactive, root fuser found no existing UART or console holders",
+    "uart": "/dev/ttyS0",
+    "observed_baud_selections": [115200, 230400, 460800, 921600, 1000000],
+    "core_init_rc": "0xec",
+    "tx_bytes_at_return": 1406,
+    "rx_bytes_at_return": 1861,
+    "base_info_queried": false,
+    "supervisor_restored_termios": true
+  },
+  "intervening_preflight": {
+    "result": "refused before UART open",
+    "console": "ttyS0 -W- (EC p a) 4:64",
+    "helper_loaded": false,
+    "observed_uptime_seconds": 144.00,
+    "assessment": "Device reboot observed between trials; not initiated by this task; cause unknown",
+    "clock_caution": "Device wall time and stored journal boot chronology inconsistent; do not attribute old shutdown entries to this restart",
+    "pstore": "empty",
+    "build": "Clock-skew warnings; clean-first rebuild explicitly compiled both C sources and linked"
+  },
+  "console_recovery": {
+    "kernel": "6.6.10",
+    "module_sha256": "c9304e05ac02b56e730a40e9d2969ac31422e6de39d2113d65e2f38970a45b66",
+    "action": "Reload existing verified module with dry_run=0 allow_last_console=1",
+    "consoles_after": [],
+    "getty_after": "masked/inactive",
+    "fuser_after": "no holders reported"
+  },
+  "second_executed_trial": {
+    "deadline_seconds": 45,
+    "probe_exit": 124,
+    "periodic_rx_bytes": 0,
+    "last_visible_periodic_tx_bytes": 32377,
+    "last_visible_periodic_elapsed_seconds": 40,
+    "core_init_return_observed": false,
+    "base_info_queried": false,
+    "supervisor_restored_termios": true,
+    "post_trial_process_check": "ps -C e300_psdk_probe returned no process"
+  },
+  "conclusions": [
+    "Some bytes were received in the first trial, but no successful SDK initialization or model identification was obtained",
+    "The second executed trial had no receive progress; physical connection and aircraft state need reconfirmation",
+    "0xec is the local SDK generic system error, not evidence by itself of invalid credentials",
+    "No power-management API was called; 24 V acceptance remains untested"
+  ]
+}

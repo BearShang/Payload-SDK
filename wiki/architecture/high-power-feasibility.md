@@ -13,6 +13,7 @@ sources:
   - samples/sample_c/platform/linux/raspberry_pi/hal/hal_usb_bulk.h
   - CMakeLists.txt
   - test/raw/e300-usb-readonly-2026-09-08.json
+  - test/raw/e300-driver-console-2026-09-08.json
 tags:
   - high-power
   - usb
@@ -20,6 +21,8 @@ tags:
 ---
 
 # 自制转接板申请高功率可行性评估
+
+**现场进度更新（2026-09-08）：后续已通过 E300 J10 尝试核心通信，曾识别 M400 / 921600，但未完整初始化。恢复测试又发生设备重启，当前暂停 SDK 和控制台模块重载；未申请或测得 24 V。以下首轮评估中的未运行描述是历史范围，最新过程见 [[wiki/experiments/e300-runtime-console-detach-2026-09-08|实验记录]]。**
 
 ## 适用范围与结论
 
@@ -33,9 +36,17 @@ tags:
 
 用户使用万用表测量自制板图示 **VCC 与 GND**，读到 **24 V** 即算本次通过。这里只验收电压申请功能，尚未测得，不预先判通过。不要求 M1000 由飞机供电、DC/DC 设计、负载电流或带载能力验证；后续若需这些能力应另立范围。
 
-已检查 E300：ARM64 Ubuntu 和开发包具备运行平台基础，但当前 UDC 目录为空，尚无可用 Device 链路。详见 [[wiki/experiments/e300-usb-readonly-2026-09-08|只读 SSH 记录]]。下一步仅聚焦通信链路、SDK 初始化、24 V 申请与用户测压。
+已检查 E300：ARM64 Ubuntu 和开发包具备运行平台基础，但当前 UDC 目录为空，尚无可用 Device 链路。用户确认接在 J3 的两只 USB-A 之一；参考原理图显示它们分别接模组 USB3/USB2 通道，而不是串口桥，暂时无需区分哪一孔来判断当前阻塞。详见 [[wiki/experiments/e300-usb-readonly-2026-09-08|只读 SSH 与 J3 通路核对]]。下一步仅聚焦通信链路、SDK 初始化、24 V 申请与用户测压。
 
 ## 硬件与电源边界
+
+最新运行期适配：用户授权后，用可卸载模块注销 ttyS0 console，保留 UART 驱动；115200 双向收发、日志隔离及卸载恢复/重载通过。模块保持加载，重启后恢复原 console，未修改固件或启动 PSDK。详见 [[wiki/experiments/e300-runtime-console-detach-2026-09-08|最小适配结果]]。此前 U-Boot 临时参数试验失败仍作为独立历史保留。
+
+后续实测：J10 接电脑已枚举为 CP210x 且串口通路正常；但 U-Boot RAM 临时改为 console=tty0 后 ttyS0 仍被 ACPI/SPCR 注册，控制台释放未通过。已恢复原启动环境，没有保存到 Flash。详见 [[wiki/experiments/e300-j10-console-trial-2026-09-08|J10 试验]]；不能将板载桥接器识别成功写成 PSDK 已可运行。
+
+最新操作状态：用户报告 J10 已连接并自行负责 5 V，授权释放串口。getty 已停用并屏蔽，ttyS0 的内核控制台仍在；启动文件已备份但未修改，未重启或启动 SDK。以下早期占用描述保留其观察时点，最新证据见 [[wiki/experiments/e300-usb-readonly-2026-09-08|授权后的串口准备]]。
+
+追加核查发现：参考底板 **J10 自带 CP2102N USB Device 桥接器，连接 UART7**，可绕过当前未启用的 M1000 原生 UDC；J2 是下载口，不当作 PSDK 运行接口。J10 尚需核实 USB VBUS 的 5 V 来源，且按厂商映射 UART7 对应的 ttyS0 正被内核控制台与 getty 使用，不能只换线即运行。证据与限定见 [[wiki/experiments/e300-usb-readonly-2026-09-08|J2/J10 核查与驱动调查]]。
 
 | 项目 | 已有证据与判断 | 尚缺证据 |
 | --- | --- | --- |

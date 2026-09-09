@@ -1,0 +1,42 @@
+{
+  "date": "2026-09-09",
+  "user_confirmation": "M400 powered on; custom board attached through SkyPort V3",
+  "change": "Checked TCIFLUSH before termios setup, matching official HAL initialization order; added count-only RX statistics",
+  "main_c_sha256": "5f917fb65bd7af60bab64c1434c475c195f0c5614524cd5871c32cb291c13d08",
+  "validation": "ARM64 build, callback/identity/RX-statistics CTest and nine configuration checks passed; existing OSAL warning remains",
+  "probe": {
+    "transport": "usb-cp210x",
+    "exit": 124,
+    "elapsed_monotonic_seconds": 45.008,
+    "elapsed_wall_seconds": 45.008,
+    "last_visible_progress_seconds": 40,
+    "tx_bytes": 25441,
+    "rx_bytes": 662,
+    "rx_by_baud": {"115200": 445, "230400": 217, "460800": 0, "921600": 0, "1000000": 0},
+    "zero_bytes": 98,
+    "ff_bytes": 120,
+    "tx_errors": 0,
+    "rx_errors": 0,
+    "result": "UART identification failed; no core initialization completion",
+    "settings_restored": true,
+    "same_boot_before_after": true
+  },
+  "local_chip_read": {
+    "usb_id": "10c4:ea60",
+    "method": "libusb IN 0xc0/0xff wValue 0x370b; no detach, reset or EEPROM write",
+    "part_number": "0x02 (CP2102 per upstream definition)",
+    "requested_1_byte_returned": 1,
+    "requested_2_bytes_returned": 1,
+    "kernel_driver_preserved": true,
+    "source_url": "https://raw.githubusercontent.com/gregkh/linux/v6.6.10/drivers/usb/serial/cp210x.c",
+    "source_download_sha256": "69c463817b223e15729401293ae58c227ee3dd9348fff3e4d6bff53187b6880c"
+  },
+  "postcheck": "No probe process or UART holder; ttyS0 console preserved",
+  "limits": [
+    "Counters are a 40-second sample, not exact final totals",
+    "Software baud labels do not prove physical baud or valid protocol frames",
+    "Read-only chip query describes only the E300-side adapter, not the aircraft-side adapter",
+    "Part-number short response does not establish authenticity or the failure cause",
+    "No power request, reboot, driver replacement, kernel changes or raw UART payload logging"
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "record_date": "2026-09-08",
+  "pc_preparation": {
+    "user_confirmed_j10_on_pc": true,
+    "usb_vid_pid": "10c4:ea60",
+    "port_status": "OK",
+    "serial_open_succeeded": true,
+    "baud": 921600,
+    "format": "8N1",
+    "flow_control": "None",
+    "dtr": false,
+    "rts": false,
+    "bytes_written": 0,
+    "port_closed": true,
+    "aircraft_host_settings_read": false
+  },
+  "trial": {
+    "user_confirmed_reconnected_to_custom_board": true,
+    "pre_trial_boot_unchanged_from_previous_trial": true,
+    "pre_trial_uptime_seconds": 670.78,
+    "console_helper_loaded": true,
+    "getty": "masked/inactive",
+    "supervisor_preflight": "passed console_released getty_masked no_existing_holders",
+    "configured_user_process_timeout_seconds": 45,
+    "sdk_output_received": false,
+    "sdk_stage_reached": "unknown after supervisor preflight",
+    "user_reported_restart_during_pending_trial": true,
+    "local_pending_ssh_client_stopped_by_agent": true,
+    "ssh_exit_after_local_stop": -1,
+    "termios_restoration_confirmed": false,
+    "power_management_present_in_probe": false,
+    "explicit_reboot_command_sent": false
+  },
+  "post_restart_readonly": {
+    "kernel_boot_identity_changed": true,
+    "uptime_seconds": 50.66,
+    "ttyS0_console_restored": true,
+    "console_helper_present": false,
+    "probe_or_supervisor_process_found": false,
+    "pstore_files": [],
+    "watchdog_class_entries": [],
+    "previous_journal_boot_matches_trial_boot": false,
+    "current_kernel_relevant_message": "GPU watchdog enabled; not evidence of a reset cause"
+  },
+  "disposition": "No module reload or SDK retry; investigate without provoking another restart",
+  "limits": [
+    "No cause established; indirect involvement of probe or console adaptation cannot be excluded",
+    "SDK output is buffered in the remote supervisor until child completion and was lost on restart",
+    "A user-process deadline does not prevent system-level resets",
+    "Prior journal does not describe the immediately preceding trial boot",
+    "No 24 V request or measurement"
+  ]
+}

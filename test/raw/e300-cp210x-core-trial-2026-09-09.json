@@ -1,0 +1,33 @@
+{
+  "date": "2026-09-09",
+  "user_report": "Replacement CP210x adapter pair self-tested successfully; one USB end on E300 J3, the other on custom board",
+  "local_usb": {"vid": "10c4", "pid": "ea60", "tty": "/dev/ttyUSB0", "driver": "cp210x", "module": "Existing in-tree /lib/modules/6.6.10/kernel/drivers/usb/serial/cp210x.ko"},
+  "transport": "usb-cp210x",
+  "reported_aircraft_usb_identity": "10c4:ea60, based on user adapter family report, not aircraft-host readback",
+  "main_c_sha256": "1462e0237be4664fead86c22f47166290af702f0465998cc99879247bd305162",
+  "checks": ["ARM64 compile and link passed with existing OSAL and clock-skew warnings", "CTest callback tests passed", "Nine non-I/O configuration cases passed", "PowerShell syntax check passed", "Private configuration shape and USB driver/identity/ownership preflight passed"],
+  "probe": {
+    "exit": 124,
+    "elapsed_monotonic_seconds": 45.004,
+    "elapsed_wall_seconds": 45.005,
+    "last_progress_seconds": 40,
+    "last_progress_tx_bytes": 25460,
+    "last_progress_rx_bytes": 700,
+    "tx_errors": 0,
+    "rx_errors": 0,
+    "identification": "Repeated UART0 identification failure; no successful aircraft identification or core_init return before deadline",
+    "settings_restored": true,
+    "same_boot_before_after": true
+  },
+  "passive_followup": {
+    "seconds_per_rate": 3,
+    "rates": [115200, 230400, 460800, 921600, 1000000],
+    "rx_bytes_per_rate": [0, 0, 0, 0, 0],
+    "uart_payload_bytes_written": 0,
+    "settings_restored_and_closed": true,
+    "interpretation": "No unsolicited data in these windows; insufficient to infer actual aircraft UART baud or a disconnected wire"
+  },
+  "postcheck": "No fuser holder or probe process; cp210x remains bound; ttyS0 kernel console remains enabled",
+  "not_performed": ["driver installation or unload", "boot or ACPI changes", "reboot", "power-management calls", "24 V request"],
+  "limits": ["Local USB enumeration is not aircraft-side enumeration evidence", "Nonzero probe RX does not establish valid DJI frames", "Last progress counters are not exact final totals", "Aircraft current power/attachment state has not been independently verified"]
+}

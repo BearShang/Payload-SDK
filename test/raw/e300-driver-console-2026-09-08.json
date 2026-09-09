@@ -1,0 +1,86 @@
+{
+  "date": "2026-09-08",
+  "scope": "Read-only M1000 UDC driver and E300 UART console inspection; no role switching, module loading, serial I/O, or SDK execution.",
+  "records": [
+    {
+      "command": "ls /usr/src",
+      "exit_code": 0,
+      "output": "gmock\ngoogletest\ngtest\nlinux-headers-6.6.10\nmtgpu-3.1.0-AB100\npython3.10\n"
+    },
+    {
+      "command": "ls -l /lib/modules/6.6.10/build /lib/modules/6.6.10/source",
+      "exit_code": 1,
+      "output": "lrwxrwxrwx 1 root root 29  5月 21  2025 /lib/modules/6.6.10/build -> /usr/src/linux-headers-6.6.10\nls: 无法访问 '/lib/modules/6.6.10/source': 没有那个文件或目录\n"
+    },
+    {
+      "command": "grep -i -E 'm1000|udc|usb.*phy' /lib/modules/6.6.10/modules.builtin",
+      "exit_code": 0,
+      "output": "kernel/drivers/usb/phy/phy-generic.ko\nkernel/drivers/usb/gadget/udc/udc-core.ko\nkernel/drivers/usb/gadget/udc/snps_udc_core.ko\nkernel/drivers/usb/gadget/udc/snps_udc_plat.ko\nkernel/drivers/usb/gadget/udc/bdc/bdc.ko\nkernel/drivers/copyengine/m1000_ce.ko\nkernel/drivers/npu/m1000_npu.ko\n"
+    },
+    {
+      "command": "find /lib/modules/6.6.10 -iname '*udc*' -o -iname '*m1000*' -o -iname '*gadget*'",
+      "exit_code": 0,
+      "output": "/lib/modules/6.6.10/kernel/drivers/usb/gadget\n/lib/modules/6.6.10/kernel/drivers/phy/mthreads/phy-m1000-usb.ko\n/lib/modules/6.6.10/kernel/drivers/spi/spi-dw-m1000.ko\n/lib/modules/6.6.10/kernel/sound/soc/mthreads/mt_m1000_disp_i2s.ko\n/lib/modules/6.6.10/kernel/sound/soc/mthreads/mt_m1000_dptx_sound_card.ko\n/lib/modules/6.6.10/kernel/sound/soc/mthreads/mt_m1000_sound_card.ko\n/lib/modules/6.6.10/kernel/sound/soc/mthreads/mt_m1000_i2s.ko\n/lib/modules/6.6.10/kernel/sound/soc/mthreads/mt_m1000_dummy_peri_snd_card.ko\n"
+    },
+    {
+      "command": "uname -r",
+      "exit_code": 0,
+      "output": "6.6.10\n"
+    },
+    {
+      "command": "ls -A /sys/class/udc",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "command": "modinfo phy-m1000-usb",
+      "exit_code": 0,
+      "output": "filename:       /lib/modules/6.6.10/kernel/drivers/phy/mthreads/phy-m1000-usb.ko\nlicense:        GPL v2\ndescription:    Mthreads USB PHY driver\nauthor:         Bindong Xu <bindong.xu@mthreads.com>\nalias:          of:N*T*Cmthreads,m1000-usb-phyC*\nalias:          of:N*T*Cmthreads,m1000-usb-phy\nalias:          acpi*:UPHY0001:*\ndepends:        \nintree:         Y\nname:           phy_m1000_usb\nvermagic:       6.6.10 SMP preempt mod_unload aarch64\n"
+    },
+    {
+      "command": "ls -l /sys/bus/platform/drivers/ | grep -E 'm1000|usb|udc'",
+      "exit_code": 1,
+      "output": "[Local PowerShell quoting failure before SSH execution; command-line excerpt omitted to avoid recording connection information.]"
+    },
+    {
+      "command": "grep -E 'CONFIG_USB_(M1000_UDC|GADGET|CONFIGFS|ROLE_SWITCH)|CONFIG_PHY_M1000_USB' /boot/config-6.6.10",
+      "exit_code": 0,
+      "output": "CONFIG_USB_GADGET=y\n# CONFIG_USB_GADGET_DEBUG is not set\n# CONFIG_USB_GADGET_DEBUG_FILES is not set\n# CONFIG_USB_GADGET_DEBUG_FS is not set\nCONFIG_USB_GADGET_VBUS_DRAW=2\nCONFIG_USB_GADGET_STORAGE_NUM_BUFFERS=2\n# CONFIG_USB_M1000_UDC is not set\n# CONFIG_USB_GADGET_XILINX is not set\nCONFIG_USB_CONFIGFS=m\nCONFIG_USB_CONFIGFS_SERIAL=y\nCONFIG_USB_CONFIGFS_ACM=y\nCONFIG_USB_CONFIGFS_OBEX=y\nCONFIG_USB_CONFIGFS_NCM=y\nCONFIG_USB_CONFIGFS_ECM=y\nCONFIG_USB_CONFIGFS_ECM_SUBSET=y\nCONFIG_USB_CONFIGFS_RNDIS=y\nCONFIG_USB_CONFIGFS_EEM=y\nCONFIG_USB_CONFIGFS_MASS_STORAGE=y\n# CONFIG_USB_CONFIGFS_F_LB_SS is not set\nCONFIG_USB_CONFIGFS_F_FS=y\n# CONFIG_USB_CONFIGFS_F_UAC1 is not set\n# CONFIG_USB_CONFIGFS_F_UAC1_LEGACY is not set\n# CONFIG_USB_CONFIGFS_F_UAC2 is not set\n# CONFIG_USB_CONFIGFS_F_MIDI is not set\n# CONFIG_USB_CONFIGFS_F_MIDI2 is not set\n# CONFIG_USB_CONFIGFS_F_HID is not set\n# CONFIG_USB_CONFIGFS_F_UVC is not set\n# CONFIG_USB_CONFIGFS_F_PRINTER is not set\n# CONFIG_USB_GADGETFS is not set\nCONFIG_USB_ROLE_SWITCH=y\nCONFIG_PHY_M1000_USB=m\n"
+    },
+    {
+      "command": "ls -l /sys/bus/platform/drivers/ | grep -E 'm1000|usb|udc'",
+      "exit_code": 0,
+      "output": "drwxr-xr-x 2 root root 0  7月 29 21:41 cros-usbpd-notify\ndrwxr-xr-x 2 root root 0  7月 29 21:41 cros-usbpd-notify-acpi\ndrwxr-xr-x 2 root root 0  7月 29 21:41 extcon-usbc-cros-ec\ndrwxr-xr-x 2 root root 0  7月 29 21:41 extcon-usb-gpio\ndrwxr-xr-x 2 root root 0  7月 29 21:41 m1000-dp-drv\ndrwxr-xr-x 2 root root 0  7月 29 21:41 m1000-dp-phy-drv\ndrwxr-xr-x 2 root root 0  7月 29 21:41 m1000-pcie\ndrwxr-xr-x 2 root root 0  7月 29 21:41 m1000-peri-i2s\ndrwxr-xr-x 2 root root 0  7月 29 21:41 m1000-pinctrl\ndrwxr-xr-x 2 root root 0  7月 29 21:41 mt-m1000-disp-i2s\ndrwxr-xr-x 2 root root 0  7月 29 21:41 mt_m1000_dptx_audio\ndrwxr-xr-x 2 root root 0  7月 29 21:41 mt_m1000_rt5672\ndrwxr-xr-x 2 root root 0  7月 29 21:41 mt-usb-phy\ndrwxr-xr-x 2 root root 0  7月 29 21:41 pcip-m1000\ndrwxr-xr-x 2 root root 0  7月 29 21:41 snps-udc-plat\ndrwxr-xr-x 2 root root 0  7月 29 21:41 usb3503\ndrwxr-xr-x 2 root root 0  7月 29 21:41 usb-conn-gpio\ndrwxr-xr-x 2 root root 0  7月 29 21:41 usb_phy_generic\ndrwxr-xr-x 2 root root 0  7月 29 21:41 xhci-m1000\n"
+    },
+    {
+      "command": "cat /sys/class/usb_role/*/role",
+      "exit_code": 0,
+      "output": "none\nnone\nnone\nnone\n"
+    },
+    {
+      "command": "ls -l /sys/bus/platform/drivers/phy-m1000-usb/",
+      "exit_code": 1,
+      "output": "ls: 无法访问 '/sys/bus/platform/drivers/phy-m1000-usb/': 没有那个文件或目录\n"
+    },
+    {
+      "command": "ls -l /dev/ttyS* /dev/ttyAMA* /dev/ttyMT*",
+      "exit_code": 1,
+      "output": "ls: 无法访问 '/dev/ttyAMA*': 没有那个文件或目录\nls: 无法访问 '/dev/ttyMT*': 没有那个文件或目录\ncrw--w---- 1 root tty     4, 64  7月 29 21:41 /dev/ttyS0\ncrw-rw---- 1 root dialout 4, 65  7月 29 21:41 /dev/ttyS1\ncrw-rw---- 1 root dialout 4, 66  7月 29 21:41 /dev/ttyS2\ncrw-rw---- 1 root dialout 4, 67  7月 29 21:41 /dev/ttyS3\n"
+    },
+    {
+      "command": "cat /proc/consoles",
+      "exit_code": 0,
+      "output": "ttyS0                -W- (EC p a)    4:64\n"
+    },
+    {
+      "command": "systemctl list-units --all --no-pager 'serial-getty@*'",
+      "exit_code": 0,
+      "output": "  UNIT                       LOAD   ACTIVE SUB     DESCRIPTION\n  serial-getty@ttyS0.service loaded active running Serial Getty on ttyS0\n\nLOAD   = Reflects whether the unit definition was properly loaded.\nACTIVE = The high-level unit activation state, i.e. generalization of SUB.\nSUB    = The low-level unit activation state, values depend on unit type.\n1 loaded units listed.\nTo show all installed unit files use 'systemctl list-unit-files'.\n"
+    },
+    {
+      "command": "ls -l /sys/bus/platform/drivers/mt-usb-phy/",
+      "exit_code": 0,
+      "output": "总计 0\n--w------- 1 root root 4096  7月 29 22:30 bind\n--w------- 1 root root 4096  7月 29 21:41 uevent\n--w------- 1 root root 4096  7月 29 22:30 unbind\nlrwxrwxrwx 1 root root    0  7月 29 22:30 UPHY0001:00 -> ../../../../devices/platform/UPHY0001:00\nlrwxrwxrwx 1 root root    0  7月 29 22:30 UPHY0001:01 -> ../../../../devices/platform/UPHY0001:01\nlrwxrwxrwx 1 root root    0  7月 29 22:30 UPHY0001:02 -> ../../../../devices/platform/UPHY0001:02\nlrwxrwxrwx 1 root root    0  7月 29 22:30 UPHY0001:03 -> ../../../../devices/platform/UPHY0001:03\n"
+    }
+  ]
+}
