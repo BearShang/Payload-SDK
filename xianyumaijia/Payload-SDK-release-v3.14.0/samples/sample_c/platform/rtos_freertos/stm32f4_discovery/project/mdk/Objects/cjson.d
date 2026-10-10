@@ -1,0 +1,10 @@
+.\objects\cjson.o: ..\..\..\..\..\module_sample\utils\cJSON.c
+.\objects\cjson.o: C:\Keil_v5\ARM\ARM_Compiler_5.06u3\Bin\..\include\string.h
+.\objects\cjson.o: C:\Keil_v5\ARM\ARM_Compiler_5.06u3\Bin\..\include\stdio.h
+.\objects\cjson.o: C:\Keil_v5\ARM\ARM_Compiler_5.06u3\Bin\..\include\math.h
+.\objects\cjson.o: C:\Keil_v5\ARM\ARM_Compiler_5.06u3\Bin\..\include\stdlib.h
+.\objects\cjson.o: C:\Keil_v5\ARM\ARM_Compiler_5.06u3\Bin\..\include\limits.h
+.\objects\cjson.o: C:\Keil_v5\ARM\ARM_Compiler_5.06u3\Bin\..\include\ctype.h
+.\objects\cjson.o: C:\Keil_v5\ARM\ARM_Compiler_5.06u3\Bin\..\include\stdint.h
+.\objects\cjson.o: ..\..\..\..\..\module_sample\utils\cJSON.h
+.\objects\cjson.o: C:\Keil_v5\ARM\ARM_Compiler_5.06u3\Bin\..\include\stddef.h

@@ -1,0 +1,15 @@
+.\objects\test_upgrade_common_file_transfer.o: ..\..\..\..\..\module_sample\upgrade\test_upgrade_common_file_transfer.c
+.\objects\test_upgrade_common_file_transfer.o: ..\..\..\..\..\module_sample\upgrade\test_upgrade_common_file_transfer.h
+.\objects\test_upgrade_common_file_transfer.o: ..\..\..\..\..\..\..\psdk_lib\include\dji_upgrade.h
+.\objects\test_upgrade_common_file_transfer.o: ..\..\..\..\..\..\..\psdk_lib\include\dji_typedef.h
+.\objects\test_upgrade_common_file_transfer.o: C:\Keil_v5\ARM\ARM_Compiler_5.06u3\Bin\..\include\stdint.h
+.\objects\test_upgrade_common_file_transfer.o: C:\Keil_v5\ARM\ARM_Compiler_5.06u3\Bin\..\include\stdbool.h
+.\objects\test_upgrade_common_file_transfer.o: C:\Keil_v5\ARM\ARM_Compiler_5.06u3\Bin\..\include\stddef.h
+.\objects\test_upgrade_common_file_transfer.o: C:\Keil_v5\ARM\ARM_Compiler_5.06u3\Bin\..\include\string.h
+.\objects\test_upgrade_common_file_transfer.o: C:\Keil_v5\ARM\ARM_Compiler_5.06u3\Bin\..\include\stdlib.h
+.\objects\test_upgrade_common_file_transfer.o: C:\Keil_v5\ARM\ARM_Compiler_5.06u3\Bin\..\include\stdio.h
+.\objects\test_upgrade_common_file_transfer.o: ..\..\..\..\..\..\..\psdk_lib\include\dji_error.h
+.\objects\test_upgrade_common_file_transfer.o: ..\..\..\..\..\..\..\psdk_lib\include\dji_logger.h
+.\objects\test_upgrade_common_file_transfer.o: ..\..\..\..\..\..\..\psdk_lib\include\dji_platform.h
+.\objects\test_upgrade_common_file_transfer.o: ..\..\..\..\..\module_sample\utils/util_md5.h
+.\objects\test_upgrade_common_file_transfer.o: ..\..\..\..\..\module_sample\upgrade\test_upgrade_platform_opt.h

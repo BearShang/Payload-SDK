@@ -1,0 +1,14 @@
+.\objects\test_power_management.o: ..\..\..\..\..\module_sample\power_management\test_power_management.c
+.\objects\test_power_management.o: ..\..\..\..\..\module_sample\power_management\test_power_management.h
+.\objects\test_power_management.o: ..\..\..\..\..\..\..\psdk_lib\include\dji_typedef.h
+.\objects\test_power_management.o: C:\Keil_v5\ARM\ARM_Compiler_5.06u3\Bin\..\include\stdint.h
+.\objects\test_power_management.o: C:\Keil_v5\ARM\ARM_Compiler_5.06u3\Bin\..\include\stdbool.h
+.\objects\test_power_management.o: C:\Keil_v5\ARM\ARM_Compiler_5.06u3\Bin\..\include\stddef.h
+.\objects\test_power_management.o: C:\Keil_v5\ARM\ARM_Compiler_5.06u3\Bin\..\include\string.h
+.\objects\test_power_management.o: C:\Keil_v5\ARM\ARM_Compiler_5.06u3\Bin\..\include\stdlib.h
+.\objects\test_power_management.o: C:\Keil_v5\ARM\ARM_Compiler_5.06u3\Bin\..\include\stdio.h
+.\objects\test_power_management.o: ..\..\..\..\..\..\..\psdk_lib\include\dji_error.h
+.\objects\test_power_management.o: ..\..\..\..\..\..\..\psdk_lib\include\dji_power_management.h
+.\objects\test_power_management.o: ..\..\..\..\..\..\..\psdk_lib\include\dji_logger.h
+.\objects\test_power_management.o: ..\..\..\..\..\..\..\psdk_lib\include\dji_platform.h
+.\objects\test_power_management.o: ..\..\..\..\..\..\..\psdk_lib\include\dji_aircraft_info.h

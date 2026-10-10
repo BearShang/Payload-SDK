@@ -1,0 +1,11 @@
+.\objects\util_link_list.o: ..\..\..\..\..\module_sample\utils\util_link_list.c
+.\objects\util_link_list.o: ..\..\..\..\..\module_sample\utils\util_link_list.h
+.\objects\util_link_list.o: ..\..\..\..\..\..\..\psdk_lib\include\dji_platform.h
+.\objects\util_link_list.o: ..\..\..\..\..\..\..\psdk_lib\include\dji_typedef.h
+.\objects\util_link_list.o: C:\Keil_v5\ARM\ARM_Compiler_5.06u3\Bin\..\include\stdint.h
+.\objects\util_link_list.o: C:\Keil_v5\ARM\ARM_Compiler_5.06u3\Bin\..\include\stdbool.h
+.\objects\util_link_list.o: C:\Keil_v5\ARM\ARM_Compiler_5.06u3\Bin\..\include\stddef.h
+.\objects\util_link_list.o: C:\Keil_v5\ARM\ARM_Compiler_5.06u3\Bin\..\include\string.h
+.\objects\util_link_list.o: C:\Keil_v5\ARM\ARM_Compiler_5.06u3\Bin\..\include\stdlib.h
+.\objects\util_link_list.o: C:\Keil_v5\ARM\ARM_Compiler_5.06u3\Bin\..\include\stdio.h
+.\objects\util_link_list.o: ..\..\..\..\..\..\..\psdk_lib\include\dji_error.h

@@ -1,0 +1,11 @@
+.\objects\util_buffer.o: ..\..\..\..\..\module_sample\utils\util_buffer.c
+.\objects\util_buffer.o: ..\..\..\..\..\module_sample\utils\util_buffer.h
+.\objects\util_buffer.o: C:\Keil_v5\ARM\ARM_Compiler_5.06u3\Bin\..\include\stdint.h
+.\objects\util_buffer.o: C:\Keil_v5\ARM\ARM_Compiler_5.06u3\Bin\..\include\string.h
+.\objects\util_buffer.o: ..\..\..\..\..\module_sample\utils\util_misc.h
+.\objects\util_buffer.o: ..\..\..\..\..\..\..\psdk_lib\include\dji_typedef.h
+.\objects\util_buffer.o: C:\Keil_v5\ARM\ARM_Compiler_5.06u3\Bin\..\include\stdbool.h
+.\objects\util_buffer.o: C:\Keil_v5\ARM\ARM_Compiler_5.06u3\Bin\..\include\stddef.h
+.\objects\util_buffer.o: C:\Keil_v5\ARM\ARM_Compiler_5.06u3\Bin\..\include\stdlib.h
+.\objects\util_buffer.o: C:\Keil_v5\ARM\ARM_Compiler_5.06u3\Bin\..\include\stdio.h
+.\objects\util_buffer.o: ..\..\..\..\..\..\..\psdk_lib\include\dji_error.h

@@ -1,0 +1,17 @@
+.\objects\dji_config_manager.o: ..\..\..\..\..\module_sample\utils\dji_config_manager.c
+.\objects\dji_config_manager.o: ..\..\..\..\..\module_sample\utils/util_misc.h
+.\objects\dji_config_manager.o: ..\..\..\..\..\..\..\psdk_lib\include\dji_typedef.h
+.\objects\dji_config_manager.o: C:\Keil_v5\ARM\ARM_Compiler_5.06u3\Bin\..\include\stdint.h
+.\objects\dji_config_manager.o: C:\Keil_v5\ARM\ARM_Compiler_5.06u3\Bin\..\include\stdbool.h
+.\objects\dji_config_manager.o: C:\Keil_v5\ARM\ARM_Compiler_5.06u3\Bin\..\include\stddef.h
+.\objects\dji_config_manager.o: C:\Keil_v5\ARM\ARM_Compiler_5.06u3\Bin\..\include\string.h
+.\objects\dji_config_manager.o: C:\Keil_v5\ARM\ARM_Compiler_5.06u3\Bin\..\include\stdlib.h
+.\objects\dji_config_manager.o: C:\Keil_v5\ARM\ARM_Compiler_5.06u3\Bin\..\include\stdio.h
+.\objects\dji_config_manager.o: ..\..\..\..\..\..\..\psdk_lib\include\dji_error.h
+.\objects\dji_config_manager.o: ..\..\..\..\..\..\..\psdk_lib\include\dji_logger.h
+.\objects\dji_config_manager.o: ..\..\..\..\..\..\..\psdk_lib\include\dji_platform.h
+.\objects\dji_config_manager.o: ..\..\..\..\..\module_sample\utils/util_file.h
+.\objects\dji_config_manager.o: ..\..\..\..\..\..\..\psdk_lib\include\dji_aircraft_info.h
+.\objects\dji_config_manager.o: ..\..\..\..\..\module_sample\utils\dji_config_manager.h
+.\objects\dji_config_manager.o: ..\..\..\..\..\..\..\psdk_lib\include\dji_core.h
+.\objects\dji_config_manager.o: ..\..\..\..\..\module_sample\utils/cJSON.h
